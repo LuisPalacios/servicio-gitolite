@@ -1,0 +1,31 @@
+#
+#  Servicio git + gitolite
+#
+#           +-------------------+
+#           |                   |
+#   1600--->|   git + gitolite  |
+#           |                   |
+#           |                   |
+#           |      rsyslogd ----|-----> (contenedor fluentd)
+#           +-------------------+
+#
+# Ejecutar manualmente en vez de usar "fig" para hacer pruebas o debug
+#
+# docker run --rm -t -i -p 1600:22 -e FLUENTD_LINK=fluentd.tld.org:24224  -v /Apps/data/git/repositories:/home/git/repositories -v /etc/localtime:/etc/localtime:ro luispa/base-gitolite /bin/bash
+#
+gitolite:
+
+  image: luispa/base-gitolite
+  
+  environment: 
+    FLUENTD_LINK: "fluentd.tld.org:24224"
+
+  ports:
+   - "1600:22"
+
+  volumes:
+   - "/Apps/data/git/repositories:/home/git/repositories"
+   - "/etc/localtime:/etc/localtime:ro"
+
+  command: supervisord -n -c /etc/supervisor/supervisord.conf
+

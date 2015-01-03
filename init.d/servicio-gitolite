@@ -1,0 +1,33 @@
+#!/sbin/runscript
+# Copyright 1999-2013 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+depend() {
+    need net
+    #need localmount
+    #need nfsmount
+}
+
+start() {
+	ebegin "Arrancando el servicio gitolite"
+
+        su luis -c "cd /Apps/docker/servicio-gitolite && /usr/local/bin/fig up -d"
+
+        eend $?
+}
+
+stop() {
+	ebegin "Parando el servicio gitolite"
+
+        su luis -c "cd /Apps/docker/servicio-gitolite &&  /usr/local/bin/fig stop"
+
+	eend $?
+}
+
+status() {
+
+        su luis -c "cd /Apps/docker/servicio-gitolite &&  /usr/local/bin/fig ps"
+
+	eend $?
+}
