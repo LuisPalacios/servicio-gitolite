@@ -5,12 +5,13 @@
 
 depend() {
     need net
-    #need localmount
-    #need nfsmount
+    need localmount
+    need nfsmount
+    after sshd
 }
 
 start() {
-	ebegin "Arrancando el servicio gitolite"
+	ebegin "Arranando servicio: Gitolite"
 
         su luis -c "cd /Apps/docker/servicio-gitolite && /usr/local/bin/fig up -d"
 
@@ -18,7 +19,7 @@ start() {
 }
 
 stop() {
-	ebegin "Parando el servicio gitolite"
+	ebegin "Parando servicio: Gitolite"
 
         su luis -c "cd /Apps/docker/servicio-gitolite &&  /usr/local/bin/fig stop"
 
