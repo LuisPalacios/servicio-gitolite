@@ -11,7 +11,7 @@
 #
 # Ejecutar manualmente en vez de usar "fig" para hacer pruebas o debug
 #
-# docker run --rm -t -i -p 1600:22 -e FLUENTD_LINK=fluentd.tld.org:24224  -v /Apps/data/git/repositories:/home/git/repositories -v /etc/localtime:/etc/localtime:ro luispa/base-gitolite /bin/bash
+# docker run --rm -t -i -p 1600:22 -e FLUENTD_LINK=fluentd.tld.org:24224  -v /Apps/data/git/repositories:/home/git/repositories -v /Apps/data/tz:/config/tz luispa/base-gitolite /bin/bash
 #
 gitolite:
 
@@ -25,7 +25,7 @@ gitolite:
 
   volumes:
    - "/Apps/data/git/repositories:/home/git/repositories"
-   - "/etc/localtime:/etc/localtime:ro"
+   - "/Apps/data/tz:/config/tz"
 
   command: supervisord -n -c /etc/supervisor/supervisord.conf
 

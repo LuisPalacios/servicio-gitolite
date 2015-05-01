@@ -26,3 +26,12 @@ Para instalar primero tienes que tener el fichero fig.yml, así que clona el rep
 Tendrás que elegir entre hacer una instalación nueva o migrar una existente, dejo aquí documentado todo el proceso:
 
 * [Servidor "gitolite" en Contenedor Docker](http://www.luispa.com/?p=184)
+
+### Volumen
+
+Directorio persistente para configurar el Timezone. Crear el directorio /Apps/data/tz y dentro de él crear el fichero timezone. Luego montarlo con -v o con fig.yml
+
+    Montar:
+       "/Apps/data/tz:/config/tz"  
+    Preparar: 
+       $ echo "Europe/Madrid" > /config/tz/timezone
